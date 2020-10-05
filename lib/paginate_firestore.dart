@@ -68,6 +68,11 @@ class _PaginateFirestoreState extends State<PaginateFirestore> {
 
   @override
   Widget build(BuildContext context) {
+    _bloc = PaginationBloc(
+      widget.query,
+      widget.itemsPerPage,
+      widget.startAfterDocument,
+    )..add(PageFetch());
     return BlocBuilder<PaginationBloc, PaginationState>(
       cubit: _bloc,
       builder: (context, state) {
@@ -115,12 +120,6 @@ class _PaginateFirestoreState extends State<PaginateFirestore> {
         }
       }
     }
-
-    _bloc = PaginationBloc(
-      widget.query,
-      widget.itemsPerPage,
-      widget.startAfterDocument,
-    )..add(PageFetch());
     super.initState();
   }
 
